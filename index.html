@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Você me ama?</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #111;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 12px 25px;
+        margin: 10px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    #sim {
+        background-color: #ff4d6d;
+        color: white;
+    }
+
+    #nao {
+        background-color: #555;
+        color: white;
+        position: absolute;
+    }
+
+    /* corações animados */
+    .heart {
+        position: absolute;
+        bottom: -50px;
+        font-size: 24px;
+        animation: subir 5s linear infinite;
+    }
+
+    @keyframes subir {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-110vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Você me ama? 😏</h1>
+    <button id="sim">Sim</button>
+    <button id="nao">Não</button>
+</div>
+
+<script>
+    const botaoNao = document.getElementById("nao");
+    const botaoSim = document.getElementById("sim");
+
+    // botão "não" foge do mouse
+    botaoNao.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+
+        botaoNao.style.left = x + "px";
+        botaoNao.style.top = y + "px";
+    });
+
+    // mensagem ao clicar no sim
+    botaoSim.addEventListener("click", () => {
+        alert("Eu já sabia 😌 nem precisava testar.");
+    });
+
+    // criar corações subindo
+    function criarCoracao() {
+        const coracao = document.createElement("div");
+        coracao.classList.add("heart");
+        coracao.innerHTML = "❤️";
+
+        coracao.style.left = Math.random() * 100 + "vw";
+        coracao.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+        document.body.appendChild(coracao);
+
+        setTimeout(() => {
+            coracao.remove();
+        }, 5000);
+    }
+
+    setInterval(criarCoracao, 300);
+</script>
+
+</body>
+</html>
